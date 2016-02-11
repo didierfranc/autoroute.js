@@ -2,7 +2,7 @@
 
 ## WIP
 
-This repo is actually evolving to solve the problem of routing in our **S**ingle **P**age **A**pplications
+This repo is actually evolving to solve the problem of routing in our **S**ingle **P**age **A**pplications, it's built with `hashchange` wich has a great compatibility > http://caniuse.com/#feat=hashchange
 
 ## Usage
 
