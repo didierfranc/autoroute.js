@@ -33,12 +33,12 @@ var name = 'Didier Franc'
 route.create('/hello', 'hello', helloWorld)
 route.create('/bye', 'bye', goodBye)
 
-function helloWorld (el) {
-  el.innerHTML = `<h1>Hello ${ name }<h1>`
+function helloWorld () {
+  this.innerHTML = `<h1>Hello ${ name }<h1>`
 }
 
-function goodBye (el) {
-  el.innerHTML = `<h1>Bye ${ name }<h1>`
+function goodBye () {
+  this.innerHTML = `<h1>Bye ${ name }<h1>`
 }
 
 </script>
