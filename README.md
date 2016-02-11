@@ -20,14 +20,25 @@ _.route(path, selector, callback)
 
 ```html
 <body>
-  <my-component></my-component>
+  <hello></hello>
+  <bye></bye>
 </body>
 ```
 
 ```javascript
-_.route('/hello', 'my-component', helloWorld)
+var name = 'Didier Franc'
+
+_.route('/hello', 'hello', helloWorld)
+_.route('/bye', 'bye', goodBye)
 
 function helloWorld (el) {
-  el.innerHTML = 'Hello World !'
+  el.innerHTML =  `<h1>Hello ${ name }<h1>`
 }
+
+function goodBye (el) {
+  el.innerHTML =  `<h1>Bye ${ name }<h1>`
+}
+
+</script>
+
 ```
