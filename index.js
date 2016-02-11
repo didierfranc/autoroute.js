@@ -1,55 +1,22 @@
-window.addEventListener("hashchange", route)
+var _ = {}
+var w = window
 
-function load (url, id, next) {
+_.route = function route(arg, query, next){
 
-  var formated = 'tmplt/' + url + '.html'
+  w.addEventListener("hashchange", function(){
 
-  var request = new XMLHttpRequest();
-  request.open('GET', formated, true);
+    var x = hash()
+    var a = x.split('/')
+    var el = document.querySelectorAll(query)[0]
 
-  request.onload = function() {
-    var resp = this.responseText;
-    var el = document.getElementById(id)
-
-    el.innerHTML = resp
-
-    var arr = el.getElementsByTagName('script')
-    
-    for (var i = 0; i < arr.length; i++) {
-      eval(arr[i].innerHTML)
+    if ( arg.slice(1) == a[0] ) {
+      next(el)
+    }else {
+      el.innerHTML = ''
     }
 
-    if (next){
-      next()
-    }
-  }
-  request.send()
-}
+  })
 
-function route(){
+  w.dispatchEvent(new HashChangeEvent("hashchange"))
 
-  var x = hash()
-  var a = x.split('--')
-
-  if (a[1]){
-    load( a[0], 'content', function(){
-      load( a[1], 'nested')
-    })
-
-  }else{
-    load( a[0] , 'content' )
-  }
-}
-
-function hash (a) {
-  if(a){
-    window.location.hash = '#/' + a
-    route()
-  }
-
-  else{
-    var h = window.location.hash
-        h = h.slice(2)
-    return h
-  }
 }
