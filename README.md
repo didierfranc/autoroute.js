@@ -12,7 +12,7 @@ Autoroute expose a global fonction `route`
 ```
 route.create(path, selector, callback)
 ```
-**route** : `string` it can be `/article`  
+**path** : `string` it can be `/article`  
 **selector** : `string` it can be `tag`, `class`, `id`  
 **callback** : `function` argument is your dom element  
 
