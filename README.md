@@ -34,10 +34,10 @@ route.create('/hello', 'hello', helloWorld)
 route.create('/bye', 'bye', goodBye)
 
 function helloWorld () {
-  this.append (`<h1>Hello ${ this.name || 'Anonymous' }<h1>`)
+  this.append( `<h1>Hello ${ this.name || 'Anonymous' }<h1>` )
 }
 
 function goodBye () {
-  this.append (`<h1>Bye ${ this.name || 'Anonymous' }<h1>`)
+  this.append( `<h1>Bye ${ this.name || 'Anonymous' }<h1>` )
 }
 ```
