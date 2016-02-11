@@ -3,20 +3,25 @@ var w = window
 var l = w.location
 
 // Register routes on hashchange event
-route.create = function (route, query, next) {
+route.create = function (route, element, next) {
 
   w.addEventListener("hashchange", function () {
 
-      console.log('fired')
-      var a = l.hash.slice(2).split('/')
-      var el = document.querySelectorAll(query)
+      var p = l.hash.slice(2).split('?')
+      var e = document.querySelectorAll(element)
+      var q = {}
 
-      if ( route.slice(1) == a[0] ) {
-        next.call(el[0])
-      } else {
-        el[0].innerHTML = ''
+      for (var i = 0; i < p.length; i++) {
+        var a = p[1].split('&')[i].split('=')
+        e[0][a[0]] = a[1]
       }
-      
+
+      if ( route.slice(1) == p[0] ) {
+        next.call(e[0], q)
+      } else {
+        e[0].innerHTML = ''
+      }
+
   })
 
 }
