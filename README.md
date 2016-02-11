@@ -28,6 +28,6 @@ _.route(path, selector, callback)
 _.route('/hello', 'my-component', helloWorld)
 
 function helloWorld (el) {
-  el.innerHTML = 'hello'
+  el.innerHTML = 'Hello World !'
 }
 ```
