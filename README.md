@@ -18,6 +18,8 @@ route.create(path, selector, callback)
 
 ## Example
 
+You can now get queries, example with : `/hello?name=Didier`
+
 ```html
 <body>
   <hello></hello>
@@ -26,8 +28,6 @@ route.create(path, selector, callback)
 ```
 
 **ES6 :** 
-
-You can now get queries from `/path?query=string&other=string`
 
 ```javascript
 route.create('/hello', 'hello', helloWorld)
