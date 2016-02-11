@@ -25,6 +25,8 @@ _.route(path, selector, callback)
 </body>
 ```
 
+**ES6 :** 
+
 ```javascript
 var name = 'Didier Franc'
 
@@ -32,11 +34,11 @@ _.route('/hello', 'hello', helloWorld)
 _.route('/bye', 'bye', goodBye)
 
 function helloWorld (el) {
-  el.innerHTML =  `<h1>Hello ${ name }<h1>`
+  el.innerHTML = `<h1>Hello ${ name }<h1>`
 }
 
 function goodBye (el) {
-  el.innerHTML =  `<h1>Bye ${ name }<h1>`
+  el.innerHTML = `<h1>Bye ${ name }<h1>`
 }
 
 </script>
