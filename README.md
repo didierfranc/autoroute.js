@@ -40,7 +40,4 @@ function helloWorld () {
 function goodBye () {
   this.innerHTML =  `<h1>Bye ${ this.name || 'Anonymous' }<h1>`
 }
-
-</script>
-
 ```
