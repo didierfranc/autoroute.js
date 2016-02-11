@@ -6,11 +6,11 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 
 ## Usage
 
-Autoroute expose a global fonction `_.route`
+Autoroute expose a global fonction `route`
 
-### _.route
+### route.create
 ```
-_.route(path, selector, callback)
+route.create(path, selector, callback)
 ```
 **route** : `string` it can be `/article`  
 **selector** : `string` it can be `tag`, `class`, `id`  
@@ -30,8 +30,8 @@ _.route(path, selector, callback)
 ```javascript
 var name = 'Didier Franc'
 
-_.route('/hello', 'hello', helloWorld)
-_.route('/bye', 'bye', goodBye)
+route.create('/hello', 'hello', helloWorld)
+route.create('/bye', 'bye', goodBye)
 
 function helloWorld (el) {
   el.innerHTML = `<h1>Hello ${ name }<h1>`
