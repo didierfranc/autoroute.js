@@ -26,7 +26,7 @@ if ( l.hash == '' ){
   l.hash = '/'
 }
 
-// Fire hashchange one to set the route
+// Fire hashchange once to set the route
 setTimeout(function(){
   w.dispatchEvent(new HashChangeEvent("hashchange"))
 }, 0)
