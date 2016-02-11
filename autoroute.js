@@ -9,7 +9,6 @@ route.create = function (route, element, next) {
 
       var p = l.hash.slice(2).split('?')
       var e = document.querySelectorAll(element)
-      var q = {}
 
       for (var i = 0; i < p.length; i++) {
         var a = p[1].split('&')[i].split('=')
@@ -17,7 +16,7 @@ route.create = function (route, element, next) {
       }
 
       if ( route.slice(1) == p[0] ) {
-        next.call(e[0], q)
+        next.call(e[0])
       } else {
         e[0].innerHTML = ''
       }
