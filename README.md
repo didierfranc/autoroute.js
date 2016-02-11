@@ -27,18 +27,18 @@ route.create(path, selector, callback)
 
 **ES6 :** 
 
-```javascript
-var name = 'Didier Franc'
+You can now get queries from `/path?query=string&other=string`
 
+```javascript
 route.create('/hello', 'hello', helloWorld)
 route.create('/bye', 'bye', goodBye)
 
 function helloWorld () {
-  this.innerHTML = `<h1>Hello ${ name }<h1>`
+  this.innerHTML =  `<h1>Hello ${ this.name || 'Anonymous' }<h1>`
 }
 
 function goodBye () {
-  this.innerHTML = `<h1>Bye ${ name }<h1>`
+  this.innerHTML =  `<h1>Bye ${ this.name || 'Anonymous' }<h1>`
 }
 
 </script>
