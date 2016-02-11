@@ -1,5 +1,6 @@
 var _ = {}
 var w = window
+w.location.hash = '/'
 
 _.route = function route(arg, query, next){
 
