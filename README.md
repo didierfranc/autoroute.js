@@ -12,9 +12,9 @@ Autoroute expose a global fonction `_.route`
 ```
 _.route(path, selector, callback)
 ```
-**route** : `string` it can be `/article`
-**selector** : `string` it can be `tag`, `class`, `id`
-**callback** : `function` argument is your dom element
+**route** : `string` it can be `/article`  
+**selector** : `string` it can be `tag`, `class`, `id`  
+**callback** : `function` argument is your dom element  
 
 ## Example
 
