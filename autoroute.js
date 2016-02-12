@@ -17,7 +17,7 @@ var route = {}
     var e = document.querySelectorAll(element)[0]
     
     e.clear = function () { e.html = e.innerHTML = '' }
-    e.render = function () { next.call(e); e.innerHTML = e.html }
+    e.render = function () { e.clear(); next.call(e); e.innerHTML = e.html }
 
     w.addEventListener("hashchange", function () {
 
