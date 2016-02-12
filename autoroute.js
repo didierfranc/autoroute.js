@@ -1,36 +1,42 @@
 var route = {}
-var w = window
-var l = w.location
 
-// Register routes on hashchange event
-route.create = function (route, element, next) {
+;(function(){
 
-  w.addEventListener("hashchange", function () {
+  var w = window
+  var l = w.location
+  
+  // Set a proper root
+  l.hash == '' ? l.hash = '/' :
+  
+  // Fire 'hashchange' event once
+  setTimeout(function(){ w.dispatchEvent(new HashChangeEvent("hashchange")) }, 0)
+
+  // Set route.create as global fn
+  window.route.create = function (path, element, next) {
+
+    var e = document.querySelectorAll(element)[0]
+    
+    e.clear = function () { e.html = e.innerHTML = '' }
+    e.render = function () { next.call(e); e.innerHTML = e.html }
+
+    w.addEventListener("hashchange", function () {
 
       var p = l.hash.slice(2).split('?')
-      var e = document.querySelectorAll(element)
 
-      for (var i = 0; i < p.length; i++) {
-        var a = p[1].split('&')[i].split('=')
-        e[0][a[0]] = a[1]
+      if (p[1]) {
+
+        var q = p[1].split('&')
+
+        for (var i = 0; i < q.length; i++) {
+          var a = q[i].split('=')
+          e[a[0]] = a[1]
+        }
+        
       }
 
-      if ( route.slice(1) == p[0] ) {
-        next.call(e[0])
-      } else {
-        e[0].innerHTML = ''
-      }
+      path.slice(1) == p[0] ? e.render() : e.clear()
 
-  })
+    })
+  }
 
-}
-
-// Set a proper root
-if ( l.hash == '' ){
-  l.hash = '/'
-}
-
-// Fire hashchange once to set the route
-setTimeout(function(){
-  w.dispatchEvent(new HashChangeEvent("hashchange"))
-}, 0)
+})()
