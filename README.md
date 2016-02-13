@@ -18,7 +18,7 @@ route.create(path, selector, callback)
 
 ## Example
 
-You can now get queries, example with : `/hello?name=Didier`
+You can now get queries directly from `this` operator, example with : `/hello?name=Didier`
 
 ```html
 <body>
