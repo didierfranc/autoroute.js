@@ -28,6 +28,7 @@ Basic tree
   bundle.js // we'll build it
   /components
     hello-world.js
+    autoroute.es6.js
 ```
 #### 1. Install dependencies
 
@@ -73,7 +74,7 @@ module.exports = {
 
 ***main.js***
 ```javascript
-import route from './components/route'
+import route from './components/autoroute.es6'
 import helloWorld from './components/hello-world'
 
 route.create('/hello', 'hello', helloWorld)
