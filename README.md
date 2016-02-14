@@ -67,13 +67,13 @@ module.exports = {
 
 #### 3. Some code
 
-index.html
+***index.html***
 ```html
 <script src="bundle.js"></script>
 <hello/>
 ```
 
-main.js
+***main.js***
 ```javascript
 import route from './components/route'
 import helloWorld from './components/hello-world'
@@ -82,7 +82,7 @@ route.create('/hello', 'hello', helloWorld)
 route.start()
 ```
 
-hello-world.js
+***hello-world.js***
 ```javascript
 export default function helloWorld () {
   this.html += `<h1>Hello ${ this.name || 'Anonymous' }<h1>`
@@ -94,7 +94,7 @@ export default function helloWorld () {
 To test it serve your `src` folder with `serve` or `superstatic` or anything else.  
 Then go to `http://localhost:port/#/hello?name=Didier`
 
-It's showing
+***It's showing***
 ```
 Hello Didier
 ```
