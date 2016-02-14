@@ -44,8 +44,6 @@ echo '{ "presets": ["es2015"] }' > .babelrc
 Edit/Add `webpack.config.js` in your project root folder as following :
 
 ```javascript
-var path = require('path');
-
 module.exports = {
     entry: "./src/main.js",
     output: {
