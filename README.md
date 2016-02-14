@@ -4,7 +4,7 @@
 
 This repo is actually evolving to solve the problem of routing in our **S**ingle **P**age **A**pplications, it's built with `hashchange` wich has a great compatibility > http://caniuse.com/#feat=hashchange  
 
-You can now get queries directly from `this.query` example : `/route?query=string`
+You can now get queries directly from `this.query` example : `/path?query=string`
 
 ## Usage
 
