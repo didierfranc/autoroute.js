@@ -89,10 +89,8 @@ export default function helloWorld () {
 
 #### 4. Result 
 
-To test it serve your `src` folder with `serve` or `superstatic` or anything else.  
-Then go to `http://localhost:port/#/hello?name=Didier`
+To test it serve your `src` folder with `serve` or `superstatic` or anything else. Then go to `http://localhost:port/#/hello?name=Didier` the result will be :
 
-***It's showing***
 ```
 Hello Didier
 ```
