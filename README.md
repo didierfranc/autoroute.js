@@ -18,9 +18,7 @@ route.create(path, selector, callback)
 
 You can use standalone **autoroute.js**, it exposes a global object `route` directly available. If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**.
 
-## Example
-
-### Get Started with ES6
+## Get Started with ES6
 
 Basic tree
 ```javascript
