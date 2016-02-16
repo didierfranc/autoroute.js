@@ -16,7 +16,9 @@ route.create(path, callback)
 **callback** : `function` argument is your dom element  
 
 ### route.start
+```
 route.start(path)
+```
 **path** : `string` it can be `/article`  
 
 If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. ~~You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).~~
@@ -43,7 +45,7 @@ npm install babel-loader babel-core babel-preset-es2015 --save-dev
 echo '{ "presets": ["es2015"] }' > .babelrc
 ```
 
-then
+then install **autoroute.js** :
 
 ```
 npm install autoroute.js
