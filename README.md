@@ -10,13 +10,12 @@ You can now get queries directly from `this.query` example : `/path?query=string
 
 ### route.create
 ```
-route.create(path, selector, callback)
+route.create(path, callback)
 ```
 **path** : `string` it can be `/article`  
-**selector** : `string` it can be `tag`, `class`, `id`  
 **callback** : `function` argument is your dom element  
 
-You can use standalone **autoroute.js**, it exposes a global object `route` directly available. If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**.
+If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).
 
 ## Get Started with ES6
 
@@ -67,7 +66,7 @@ module.exports = {
 ***index.html***
 ```html
 <script src="bundle.js"></script>
-<hello/>
+<router></router>
 ```
 
 ***main.js***
@@ -75,7 +74,7 @@ module.exports = {
 import route from './components/autoroute.es6'
 import helloWorld from './components/hello-world'
 
-route.create('/hello', 'hello', helloWorld)
+route.create('/hello', helloWorld)
 route.start()
 ```
 
