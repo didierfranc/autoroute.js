@@ -13,7 +13,7 @@ You can now get queries directly from `this.query` example : `/path?query=string
 route.create(path, callback)
 ```
 **path** : `string` it can be `/article`  
-**callback** : `function` argument is your dom element  
+**callback** : `function` a function to make things when route is matching path
 
 ### route.start
 ```
