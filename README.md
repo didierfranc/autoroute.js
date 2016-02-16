@@ -33,7 +33,6 @@ Basic tree
   bundle.js // we'll build it
   /components
     hello-world.js
-    autoroute.es6.js
 ```
 #### 1. Install dependencies
 
