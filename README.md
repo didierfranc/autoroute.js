@@ -36,6 +36,7 @@ Assuming npm is installed, in your project folder run :
 npm init
 npm install -g webpack
 npm install babel-loader babel-core babel-preset-es2015 --save-dev
+npm install autoroute.js
 echo '{ "presets": ["es2015"] }' > .babelrc
 ```
 
@@ -71,7 +72,7 @@ module.exports = {
 
 ***main.js***
 ```javascript
-import route from './components/autoroute.es6'
+import route from 'autoroute.js'
 import helloWorld from './components/hello-world'
 
 route.create('/hello', helloWorld)
