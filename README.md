@@ -15,7 +15,11 @@ route.create(path, callback)
 **path** : `string` it can be `/article`  
 **callback** : `function` argument is your dom element  
 
-If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).
+### route.start
+route.start(path)
+**path** : `string` it can be `/article`  
+
+If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. ~~You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).~~
 
 ## Get Started with ES6
 
@@ -76,7 +80,7 @@ import route from 'autoroute.js'
 import helloWorld from './components/hello-world'
 
 route.create('/hello', helloWorld)
-route.start()
+route.start('/hello')
 ```
 
 ***hello-world.js***
