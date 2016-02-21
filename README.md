@@ -6,6 +6,8 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 
 You can now get queries directly from `this.query` example : `/path?query=string`
 
+You can now listen `domChange` event to handle action when DOM is updated.
+
 ## Usage
 
 ### route.create
