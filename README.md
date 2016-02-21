@@ -1,12 +1,11 @@
 # autoroute.js
 
-## WIP
-
 This repo is actually evolving to solve the problem of routing in our **S**ingle **P**age **A**pplications, it's built with `hashchange` wich has a great compatibility > http://caniuse.com/#feat=hashchange  
 
-You can now get queries directly from `this.query` example : `/path?query=string`
+## Changes
 
-You can now listen `domChange` event to handle action when DOM is updated.
+- Get queries directly from `this.query` example : `/path?query=string`
+- Listen `domChange` event to handle action when DOM is updated.
 
 ## Usage
 
