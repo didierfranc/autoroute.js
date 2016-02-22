@@ -1,17 +1,40 @@
+var Touch = require('hammerjs')
+
+var route = {}
 var w = window
 var l = w.location
-var route = {}
 
-route.create = (path, next) => {
+route.create = function (path, next) {
 
   var e = document.createElement(path.slice(1))
-  var p = document.getElementsByTagName('route')[0]
+  e.innerHTML = e.html = ''
+
+  e.on = function ( event, callback ) {
+
+    e.addEventListener(event, function(){
+      callback()
+      e.render()
+    })
+
+  }
+
+  var p = document.querySelectorAll('#router')[0]
   p.appendChild(e)
 
-  w.addEventListener("hashchange", () => {
+  e.link = new Event('link')
 
-    var clear = () => e.html = e.innerHTML = ''
-    var render = () => { clear(); next.call(e); e.innerHTML = e.html }
+  var show = function () { e.style.display = 'block' }
+  var hide = function () { e.style.display = 'none' }
+
+  e.render = function () {
+    e.innerHTML = e.html
+    e.html = ''
+  }
+
+  next.call(e)
+  e.render()
+
+  w.addEventListener("hashchange", function () {
 
     var p = l.hash.slice(2).split('?')
 
@@ -23,21 +46,80 @@ route.create = (path, next) => {
         var a = q[i].split('=')
         e[a[0]] = a[1]
       }
+
+      if ( path.slice(1) == p[0] && p[1]) { e.dispatchEvent(e.link) }
+
     }
 
-    path.slice(1) == p[0] ? render() : clear()
-
+    path.slice(1) == p[0] ? show() : hide()
   })
 }
 
-route.start = path => {
+route.start = function (path) {
   l.hash = path
-  route.refresh()
+  l.hash == '' ? l.hash = '/' : l.hash = path
+  w.dispatchEvent(new HashChangeEvent("hashchange"))
 }
 
-route.refresh = () => {
-  l.hash == '' ? l.hash = '/' :
-  setTimeout( () => { w.dispatchEvent(new HashChangeEvent("hashchange")) }, 0)
+module.exports = route
+
+var target = document.getElementById('router')
+var observer = new MutationObserver(onDomChange)
+var config = {
+  attributes: true,
+  childList: true,
+  characterData: true,
+  subtree : true,
+  attributeFilter : ['href']
 }
 
-export default route
+observer.observe(target, config)
+
+w.domChange = new Event('domChange')
+
+function onDomChange () {
+  w.dispatchEvent(domChange)
+  console.log('dom updated')
+  linkify()
+}
+
+var touchable = []
+
+function linkify () {
+
+  touchable.forEach(function(e){
+    e.destroy()
+  })
+
+  touchable = []
+
+  var els = document.body.querySelectorAll('[link]')
+
+  for (var i = 0; i < els.length; i++) {
+
+    touchable[i] = new Touch(els[i], {
+      touchAction: 'pan-x pan-y'
+    })
+
+    touchable[i].on('tap', function(ev) {
+
+        var el = ev.target
+        l.hash = '/' + el.getAttribute('link')
+
+        if ( !l.hash.split('?')[1] ) {
+
+          document.querySelectorAll('.active')[0].classList.remove('active')
+          el.classList.add('active')
+        }
+
+    })
+  }
+}
+
+w.el = function (element, callback) {
+  var els = document.querySelectorAll(element)
+
+  for (var i = 0; i < els.length; i++) {
+    callback(els[i])
+  }
+}
