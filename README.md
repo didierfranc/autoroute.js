@@ -129,7 +129,7 @@ export default function helloWorld () {
 ***bye.js***
 ```javascript
 export default function bye () {
-    this.on('link', () => {
+  this.on('link', () => {
       this.html += `Bye bye ${ this.name || 'Anonymous' }`
   })
 }
