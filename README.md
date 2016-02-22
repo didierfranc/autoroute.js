@@ -8,8 +8,9 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 
 - A new global `domChange` event to handle action when DOM is updated.
 - `this.on()` listen to ***scoped*** `link` & ***global*** events. It re-render `html` after callback execution.
-- Add `link` attribute to any html tag, eg : `<h1 link="route?query=string">Click Me</h2>`
-- HammerJS is now a part of Autoroute.js, for `link` attribute and future interactions.
+- Add `link` attribute to any html tag, eg : `<h1 link="route?query=string">Click Me</h2>`.
+- HammerJS is now part of Autoroute.js, the best way to handle touch gestures.
+- Autoroute.js uses HammerJS `tap` for `link` attribute and future interactions.
 
 **1.0.7**
 
