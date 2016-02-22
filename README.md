@@ -34,7 +34,7 @@ route.start(path)
 
 ### 2. Module
 
-Inside your module, see `hello-world.js` in the following you can use that `this` methods :
+Inside your module you have this, see `hello-world.js` or `bye.js` in the following :
 
 #### this.html
 ```javascript
