@@ -110,7 +110,7 @@ module.exports = {
 ```javascript
 import route from 'autoroute.js'
 import helloWorld from './components/hello-world'
-import bye from './components/ye'
+import bye from './components/bye'
 
 route.create('/hello', helloWorld)
 route.create('/bye', bye)
