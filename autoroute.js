@@ -79,7 +79,6 @@ w.domChange = new Event('domChange')
 
 function onDomChange () {
   w.dispatchEvent(domChange)
-  console.log('dom updated')
   linkify()
 }
 
