@@ -7,7 +7,7 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 **1.0.9**
 
 - A new global `domChange` event to handle action when DOM is updated.
-- `this.on()` listen ***scoped*** & ***global*** events (`link`)
+- `this.on()` listen to ***scoped*** `link` & ***global*** events. It re-render `html` after callback execution.
 - Add `link` attribute to any html tag (eg : `<h1 link="route?query=string">Click Me</h2>`)
 - HammerJS is now a part of Autoroute.js, for `link` attribute and future interactions.
 
@@ -31,6 +31,8 @@ route.start(path)
 ```
 **path** : `string` it can be `/article`  
 
+
+***
 
 ### 2. Module
 
