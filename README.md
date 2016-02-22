@@ -31,9 +31,6 @@ route.start(path)
 ```
 **path** : `string` it can be `/article`  
 
-
-***
-
 ### 2. Module
 
 Inside your module, see `hello-world.js` in the following you can use that `this` methods :
