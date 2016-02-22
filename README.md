@@ -4,23 +4,47 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 
 ## Changes
 
-- Get queries directly from `this.query` example : `/path?query=string`
-- Listen `domChange` event to handle action when DOM is updated.
+**1.0.9**
+
+- A new global `domChange` event to handle action when DOM is updated.
+- `this.on()` to listen to scoped events.
+
+**1.0.7**
+
+- Get queries directly from `/path?query=string` with `this.query`.
 
 ## Usage
 
-### route.create
-```
+### Main
+#### route.create
+```javascript
 route.create(path, callback)
 ```
 **path** : `string` it can be `/article`  
 **callback** : `function` a function to make things when route is matching path
 
 ### route.start
-```
+```javascript
 route.start(path)
 ```
 **path** : `string` it can be `/article`  
+
+
+### Module
+
+Inside your module, see `hello-world.js` in the following you can use that `this` methods :
+
+#### this.html
+```javascript
+this.html += `some html`
+```
+
+#### this.on()
+```javascript
+this.on(event, callback)
+```
+
+At this time, Autoroute.js add a `link` event which works with link attribute.  
 
 If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. ~~You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).~~
 
@@ -78,22 +102,34 @@ module.exports = {
 ***index.html***
 ```html
 <script src="bundle.js"></script>
-<router></router>
+<section id="router"></section>
 ```
 
 ***main.js***
 ```javascript
 import route from 'autoroute.js'
 import helloWorld from './components/hello-world'
+import bye from './components/ye'
 
 route.create('/hello', helloWorld)
+route.create('/bye', bye)
 route.start('/hello')
 ```
 
 ***hello-world.js***
 ```javascript
 export default function helloWorld () {
-  this.html += `<h1>Hello ${ this.name || 'Anonymous' }<h1>`
+  this.html += `<h1>Hello ${ this.name || 'Anonymous' }<h1>
+                <h2 link="bye?name="${ this.name || 'Anonymous' }"></h2>`
+}
+```
+
+***bye.js***
+```javascript
+export default function bye () {
+    this.on('link', () => {
+      this.html += `Bye bye ${ this.name || 'Anonymous' }`
+  })
 }
 ```
 
