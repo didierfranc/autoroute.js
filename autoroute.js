@@ -18,7 +18,7 @@ function create (path, fn) {
   e.innerHTML = e.html = ''
   e.classList.add('route')
 
-  e.fn = function () {
+  e.render = function () {
     fn.call(e)
     e.innerHTML = e.html
     e.html = ''
@@ -29,7 +29,7 @@ function create (path, fn) {
   }
 
   e.q = {}
-  e.fn()
+  e.renderf()
 
   route.routes[path] = e
 }
@@ -92,7 +92,7 @@ window.addEventListener('hashchange', function (ev) {
       }
 
       route.hide()
-      route.routes[newH[0]].fn()
+      route.routes[newH[0]].render()
       route.routes[newH[0]].show()
 
     } else {
