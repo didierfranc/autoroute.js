@@ -132,7 +132,7 @@ route.start('/hello')
 ```javascript
 export default function () {
   this.html += `<h1>Hello ${ this.q.name || 'Anonymous' }<h1>
-                <h2 link="bye?name="${ this.q.name || 'Anonymous' }"></h2>`
+                <h2 link="bye?name="${ this.q.name || 'Anonymous' }">Quit ?</h2>`
 }
 ```
 
@@ -151,4 +151,7 @@ Run `webpack` and serve your `src` folder with `serve` or `superstatic` or anyth
 
 ```
 Hello Didier
+Quit ?
 ```
+
+A tap on `Quit ?` and you're on `/bye?name=Didier`
