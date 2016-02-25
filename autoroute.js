@@ -1,124 +1,163 @@
 var Touch = require('hammerjs')
 
-var route = {}
-var w = window
-var l = w.location
+var route = {
+  create : create,
+  start : start,
+  hide : hide,
+  routes : {},
+  t : []
+}
 
-route.create = function (path, next) {
+function create (path, fn) {
 
-  var e = document.createElement(path.slice(1))
+  path = path.slice(1)
+
+  var e = document.createElement(path)
+  document.getElementById('router').appendChild(e)
+
   e.innerHTML = e.html = ''
+  e.classList.add('route')
 
-  e.on = function ( event, callback ) {
-
-    e.addEventListener(event, function(){
-      callback()
-      e.render()
-    })
-
-  }
-
-  var p = document.querySelectorAll('#router')[0]
-  p.appendChild(e)
-
-  e.link = new Event('link')
-
-  var show = function () { e.style.display = 'block' }
-  var hide = function () { e.style.display = 'none' }
-
-  e.render = function () {
+  e.fn = function () {
+    fn.call(e)
     e.innerHTML = e.html
     e.html = ''
   }
 
-  next.call(e)
-  e.render()
+  e.show = function () {
+    e.style.display = 'block'
+  }
 
-  w.addEventListener("hashchange", function () {
+  e.q = {}
+  e.fn()
 
-    var p = l.hash.slice(2).split('?')
-
-    if (p[1]) {
-
-      var q = p[1].split('&')
-
-      for (var i = 0; i < q.length; i++) {
-        var a = q[i].split('=')
-        e[a[0]] = a[1]
-      }
-
-      if ( path.slice(1) == p[0] && p[1]) { e.dispatchEvent(e.link) }
-
-    }
-
-    path.slice(1) == p[0] ? show() : hide()
-  })
+  route.routes[path] = e
 }
 
-route.start = function (path) {
-  l.hash = path
-  l.hash == '' ? l.hash = '/' : l.hash = path
-  w.dispatchEvent(new HashChangeEvent("hashchange"))
+function el (element, callback) {
+  var els = document.querySelectorAll(element)
+  for (var i = 0; i < els.length; i++) {
+    callback(els[i], i)
+  }
 }
-
-module.exports = route
-
-var target = document.getElementById('router')
-var observer = new MutationObserver(onDomChange)
-var config = {
-  attributes: true,
-  childList: true,
-  characterData: true,
-  subtree : true,
-  attributeFilter : ['href']
-}
-
-observer.observe(target, config)
-
-w.domChange = new Event('domChange')
-
-function onDomChange () {
-  w.dispatchEvent(domChange)
-  linkify()
-}
-
-var touchable = []
 
 function linkify () {
 
-  touchable.forEach(function(e){
-    e.destroy()
-  })
+  route.t.forEach(function (e) { e.destroy() })
+  route.t = []
 
-  touchable = []
+  el('[link]', function (el, i) {
 
-  var els = document.body.querySelectorAll('[link]')
+    route.t[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t[i].on('tap', function(ev) {
 
-  for (var i = 0; i < els.length; i++) {
+        window.location.hash = '/' + ev.target.getAttribute('link')
 
-    touchable[i] = new Touch(els[i], {
-      touchAction: 'pan-x pan-y'
-    })
-
-    touchable[i].on('tap', function(ev) {
-
-        var el = ev.target
-        l.hash = '/' + el.getAttribute('link')
-
-        if ( !l.hash.split('?')[1] ) {
-
+        if ( !window.location.hash.split('?')[1] ) {
           document.querySelectorAll('.active')[0].classList.remove('active')
-          el.classList.add('active')
+          ev.target.classList.add('active')
         }
-
     })
+  })
+}
+
+function start (path) {
+  window.location.hash = path
+  linkify()
+}
+
+function hide () {
+  for (var item in this.routes) {
+    this.routes[item].style.display = 'none'
   }
 }
 
-w.el = function (element, callback) {
-  var els = document.querySelectorAll(element)
+export default route
 
-  for (var i = 0; i < els.length; i++) {
-    callback(els[i])
+window.location.hash = '/'
+window.addEventListener('hashchange', function (ev) {
+
+  var newH = ev.newURL ? ev.newURL.split('#/')[1].split('?') : []
+  var oldH = ev.oldURL ? ev.oldURL.split('#/')[1].split('?') : []
+
+  if (route.routes[newH[0]]) {
+
+    if (newH[1]) {
+
+      var q = newH[1].split('&')
+
+      for (var i = 0; i < q.length; i++) {
+        var a = q[i].split('=')
+        route.routes[newH[0]].q[a[0]] = a[1]
+      }
+
+      route.hide()
+      route.routes[newH[0]].fn()
+      route.routes[newH[0]].show()
+
+    } else {
+
+      route.hide()
+      route.routes[newH[0]].show()
+
+    }
+
   }
+
+})
+
+var h,f
+el('header', e => h = e.offsetHeight )
+el('footer', e => f = e.offsetHeight )
+
+var css = document.createElement('style')
+css.innerHTML =
+`
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
+  font-family: sans-serif;
+  font-weight: 300
 }
+
+*:not(input) {
+  -webkit-user-select: none
+}
+
+::-webkit-scrollbar {
+  display:none
+}
+
+html {
+  background-color: #fafafa
+}
+
+body, #route {
+  display: block;
+  position: absolute;
+  width: 100%;
+  overflow: hidden
+}
+
+a {
+  text-decoration: none;
+  color: black
+}
+
+.route {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: ${ window.innerHeight - f - h - 20 + 'px' };
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fafafa;
+  animation-duration: 0.3s;
+  animation-delay: 0s
+}
+`
+document.body.appendChild(css)
