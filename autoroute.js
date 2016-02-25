@@ -29,7 +29,7 @@ function create (path, fn) {
   }
 
   e.q = {}
-  e.renderf()
+  e.render()
 
   route.routes[path] = e
 }
