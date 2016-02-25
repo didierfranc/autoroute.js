@@ -4,6 +4,10 @@ This repo is actually evolving to solve the problem of routing in our **S**ingle
 
 ## Changes
 
+**1.1.0 Soon**
+
+Full rewrite, new things ... 
+
 **1.0.9**
 
 - A new global `domChange` event to handle action when DOM is updated.
