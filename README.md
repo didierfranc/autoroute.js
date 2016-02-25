@@ -1,29 +1,24 @@
 # autoroute.js
 
-This repo is actually evolving to solve the problem of routing in our **S**ingle **P**age **A**pplications, it's built with `hashchange` wich has a great compatibility > http://caniuse.com/#feat=hashchange  
+This repo is actually evolving to solve the problem of routing in our **s**ingle **p**age **a**pplications, especially on mobile. It's built on top of `hashchange` wich has a [great compatibility](http://caniuse.com/#feat=hashchange).
 
 ## Changes
 
-**1.1.0 Soon**
+**1.0.11**
 
-Full rewrite, new things ... 
+- Full rewrite
 
 **1.0.9**
 
-- A new global `domChange` event to handle action when DOM is updated.
 - HammerJS is now part of Autoroute.js, the best way to handle touch gestures.
-- `this.on()` listen to ***scoped*** & ***global*** events. It re-render `html` after callback execution.
 - Add `link` attribute to any html tag, eg : `<h1 link="route?query=string">Click Me</h2>`.
 - A `tap` on element with `link` attribute dispatches `link` event inside the scope.
 - Autoroute.js uses HammerJS `tap` for `link` attribute and future interactions.
 
-**1.0.7**
-
-- Get queries directly from `/path?query=string` with `this.query`.
-
 ## Usage
 
 ### 1. Main
+
 #### route.create
 ```javascript
 route.create(path, callback)
@@ -39,21 +34,30 @@ route.start(path)
 
 ### 2. Module
 
-Inside your module you have this, see `hello-world.js` or `bye.js` in the following :
+Inside your module you can do this, see `hello-world.js` or `bye.js` in the following :
 
 #### this.html
 ```javascript
 this.html += `some html`
 ```
 
-#### this.on()
+#### this.q
 ```javascript
-this.on(event, callback)
+this.html += `Hello ${ this.q.name }` // hello?name=Didier
 ```
 
-At this time, Autoroute.js add a `link` event which works with link attribute.  
+#### this.anim
+```javascript
+this.anim = true // default 'false'
+```
 
-If you want to modularize your app with ES6 read the following, explaining modularization with **Webpack** & **Babel**. ~~You can already use standalone **autoroute.js**, it exposes a global object `route` directly available (tends to disappear).~~
+Every module is rendered once on `route.start()`. If you have query in your `hash`, the module will be re-rendered when `hash` will match module route. If you don't use query in your module and you need to re-render every times :
+
+```html
+<li link="path?">Go somewhere<li> // Just add question mark
+```
+
+~~If you want to modularize your app with ES6~~ Read the following, explaining modularization with **Webpack** & **Babel**.
 
 ## Get Started with ES6
 
@@ -64,7 +68,8 @@ Basic tree
   main.js
   bundle.js // we'll build it
   /components
-    hello-world.js
+    hello.js
+    bye.js
 ```
 #### 1. Install dependencies
 
@@ -96,7 +101,7 @@ module.exports = {
       loaders: [
         {
           test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules\/(?!autoroute)/,
           loader: "babel"
         }
       ]
@@ -115,7 +120,7 @@ module.exports = {
 ***main.js***
 ```javascript
 import route from 'autoroute.js'
-import helloWorld from './components/hello-world'
+import hello from './components/hello'
 import bye from './components/bye'
 
 route.create('/hello', helloWorld)
@@ -126,8 +131,8 @@ route.start('/hello')
 ***hello-world.js***
 ```javascript
 export default function helloWorld () {
-  this.html += `<h1>Hello ${ this.name || 'Anonymous' }<h1>
-                <h2 link="bye?name="${ this.name || 'Anonymous' }"></h2>`
+  this.html += `<h1>Hello ${ this.q.name || 'Anonymous' }<h1>
+                <h2 link="bye?name="${ this.q.name || 'Anonymous' }"></h2>`
 }
 ```
 
@@ -135,12 +140,12 @@ export default function helloWorld () {
 ```javascript
 export default function bye () {
   this.on('link', () => {
-      this.html += `Bye bye ${ this.name || 'Anonymous' }`
+      this.html += `Bye bye ${ this.q.name || 'Anonymous' }`
   })
 }
 ```
 
-#### 4. Test/Result 
+#### 4. Test/Result
 
 Run `webpack` and serve your `src` folder with `serve` or `superstatic` or anything else. Then go to `http://localhost:port/#/hello?name=Didier` the result will be :
 
