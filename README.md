@@ -54,7 +54,7 @@ this.anim = true // default 'false'
 Every module is rendered once on `route.start()`. If you have query in your `hash`, the module will be re-rendered when `hash` will match module route. If you don't use query in your module and you need to re-render every times :
 
 ```html
-<li link="path?">Go somewhere<li> // Just add question mark
+<li link="path?">Go somewhere<li> <!-- Just add a question mark -->
 ```
 
 ~~If you want to modularize your app with ES6~~ Read the following, explaining modularization with **Webpack** & **Babel**.
