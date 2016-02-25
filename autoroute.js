@@ -1,4 +1,4 @@
-var Touch = require('hammerjs')
+import Touch from 'hammerjs'
 
 var route = {
   create : create,
