@@ -51,12 +51,12 @@ function linkify () {
     route.t[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
     route.t[i].on('tap', function(ev) {
 
-        window.location.hash = '/' + ev.target.getAttribute('link')
+      window.location.hash = '/' + ev.target.getAttribute('link')
 
-        if ( !window.location.hash.split('?')[1] ) {
-          document.querySelectorAll('.active')[0].classList.remove('active')
-          ev.target.classList.add('active')
-        }
+      if ( !window.location.hash.split('?')[1] ) {
+        document.querySelectorAll('.active')[0].classList.remove('active')
+        ev.target.classList.add('active')
+      }
     })
   })
 }
