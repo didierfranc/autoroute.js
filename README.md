@@ -130,7 +130,7 @@ route.start('/hello')
 
 ***hello-world.js***
 ```javascript
-export default function helloWorld () {
+export default function () {
   this.html += `<h1>Hello ${ this.q.name || 'Anonymous' }<h1>
                 <h2 link="bye?name="${ this.q.name || 'Anonymous' }"></h2>`
 }
@@ -138,7 +138,7 @@ export default function helloWorld () {
 
 ***bye.js***
 ```javascript
-export default function bye () {
+export default function () {
   this.on('link', () => {
       this.html += `Bye bye ${ this.q.name || 'Anonymous' }`
   })
