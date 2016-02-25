@@ -139,9 +139,7 @@ export default function () {
 ***bye.js***
 ```javascript
 export default function () {
-  this.on('link', () => {
-      this.html += `Bye bye ${ this.q.name || 'Anonymous' }`
-  })
+  this.html += `Bye bye ${ this.q.name || 'Anonymous' }`
 }
 ```
 
