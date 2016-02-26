@@ -4,6 +4,10 @@ This repo is actually evolving to solve the problem of routing in our **s**ingle
 
 ## Changes
 
+**1.0.12**
+
+- Slide animation with `this.anim`
+
 **1.0.11**
 
 - Full rewrite
