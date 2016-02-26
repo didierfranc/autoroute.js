@@ -14,7 +14,7 @@ function create (path, fn) {
   var e = document.createElement(path)
   document.getElementById('router').appendChild(e)
 
-  e.innerHTML = e.html = ''
+  e.html = ''
   e.className = 'route hide'
   e.anim = false
   e.q = {}
@@ -98,8 +98,8 @@ window.addEventListener('hashchange', ev => {
 
     } else {
 
-      if (route.routes[oldH[0]]) route.routes[oldH[0]].classList.add('hide')
       route.routes[newH[0]].classList.remove('hide')
+      if (route.routes[oldH[0]]) route.routes[oldH[0]].classList.add('hide')
 
     }
 
@@ -152,7 +152,7 @@ a {
   position: absolute;
   width: 100%;
   height: ${ window.innerHeight - f - h - 20 + 'px' };
-  overflow: scroll;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   background-color: #fafafa;
   animation-duration: 0.3s;
@@ -161,7 +161,7 @@ a {
 }
 
 .hide {
-  visibility : hidden
+  display : none
 }
 
 @-webkit-keyframes slideInRight {
