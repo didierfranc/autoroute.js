@@ -119,9 +119,13 @@ var h,f
 el('header', e => h = e.offsetHeight)
 el('footer', e => f = e.offsetHeight)
 
-var css = document.createElement('style')
+var css = document.createElement('autorouthings')
 css.innerHTML =
 `
+<svg back xmlns="http://www.w3.org/2000/svg" width="13" height="22" class="hide">
+  <path fill="#fff" fill-rule="evenodd" d="M.5 11L11 .5l2 2L4.5 11l8.5 8.5-2 2L.5 11z"/>
+</svg>
+<style>
 * {
   padding: 0;
   margin: 0;
@@ -132,28 +136,21 @@ css.innerHTML =
   font-weight: 300
 }
 
-*:not(input) {
-  -webkit-user-select: none
-}
+*:not(input) { -webkit-user-select: none }
 
-::-webkit-scrollbar {
-  display:none
-}
+::-webkit-scrollbar { display:none }
 
-html {
-  background-color: #fafafa
-}
+.hide { display : none }
 
 body, #router {
   display: block;
   position: absolute;
   width: 100%;
+  background-color: #fafafa;
   overflow: hidden
 }
 
-#router {
-  top : ${ h }px
-}
+#router { top : ${ h }px }
 
 a {
   text-decoration: none;
@@ -173,43 +170,46 @@ a {
   animation-fill-mode: both
 }
 
-.hide {
-  display : none
+[back]{
+  position: fixed;
+  z-index: 10;
+  padding: 10px
 }
 
 @-webkit-keyframes slideInRight {
   from {
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
-    visibility: visible;
+    visibility: visible
   }
 
   to {
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
   }
 }
 
 .in {
-  -webkit-animation-name: slideInRight;
+  -webkit-animation-name: slideInRight
 }
 
 @-webkit-keyframes slideOutRight {
   from {
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
   }
 
   to {
     visibility: hidden;
     -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0)
   }
 }
 
 .out {
   -webkit-animation-name: slideOutRight;
-  animation-name: slideOutRight;
+  animation-name: slideOutRight
 }
+</style>
 `
 document.body.appendChild(css)
