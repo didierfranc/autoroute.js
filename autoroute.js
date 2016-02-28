@@ -4,7 +4,7 @@ var route = {
   create : create,
   start : start,
   routes : {},
-  t : []
+  t : { link : [], back : [] }
 }
 
 function create (path, fn) {
@@ -24,6 +24,7 @@ function create (path, fn) {
     e.anim ? e.style.zIndex = '2' : e.style.zIndex = '1'
     e.innerHTML = e.html
     e.html = ''
+    linkify()
   }
 
   e.render()
@@ -40,13 +41,14 @@ function el (element, fn) {
 
 function linkify () {
 
-  route.t.forEach( e => e.destroy() )
-  route.t = []
+  route.t.link.destroy ? route.t.link.forEach( e => e.destroy() ) :
+  route.t.back.destroy ? route.t.back.forEach( e => e.destroy() ) :
+  route.t = { link : [], back : [] }
 
   el('[link]', (el, i) => {
 
-    route.t[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
-    route.t[i].on('tap', ev => {
+    route.t.link[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.link[i].on('tap', ev => {
 
       window.location.hash = '/' + ev.target.getAttribute('link')
 
@@ -57,11 +59,16 @@ function linkify () {
 
     })
   })
+
+  el('[back]', (el, i) => {
+    route.t.back[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.back[i].on('tap', () => history.go(-1) )
+  })
+
 }
 
 function start (path) {
   window.location.hash = path
-  linkify()
 }
 
 export default route
@@ -89,12 +96,14 @@ window.addEventListener('hashchange', ev => {
       route.routes[newH[0]].classList.remove('out')
       route.routes[newH[0]].classList.add('in')
       setTimeout(function(){ route.routes[oldH[0]].classList.add('hide') }, 300)
+      el('[back]', e => e.classList.remove('hide') )
 
     } else if (route.routes[oldH[0]] && route.routes[oldH[0]].anim) {
 
       route.routes[newH[0]].classList.remove('hide')
       route.routes[oldH[0]].classList.remove('in')
       route.routes[oldH[0]].classList.add('out')
+      el('[back]', e => e.classList.add('hide') )
 
     } else {
 
@@ -135,11 +144,15 @@ html {
   background-color: #fafafa
 }
 
-body, #route {
+body, #router {
   display: block;
   position: absolute;
   width: 100%;
   overflow: hidden
+}
+
+#router {
+  top : ${ h }px
 }
 
 a {
@@ -151,7 +164,7 @@ a {
   display: block;
   position: absolute;
   width: 100%;
-  height: ${ window.innerHeight - f - h - 20 + 'px' };
+  height: ${ window.innerHeight - f - h - 20}px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   background-color: #fafafa;
