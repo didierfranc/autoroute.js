@@ -6,6 +6,10 @@ https://autoroutejs.readme.io/
 
 ## Changes
 
+**1.0.19-1.0.23**
+
+- Some improvements
+
 **1.0.18**
 
 - Plays well with form/input
