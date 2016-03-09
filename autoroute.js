@@ -4,7 +4,7 @@ var route = {
   create : create,
   start : start,
   routes : {},
-  t : { link : [], back : [] }
+  t : { link : [], back : [], tap : [] }
 }
 
 function create (path, fn) {
@@ -56,15 +56,16 @@ function start (path) {
 
 function linkify () {
 
-  route.t.link.destroy ? route.t.link.forEach( e => e.destroy() ) :
-  route.t.back.destroy ? route.t.back.forEach( e => e.destroy() ) :
-  route.t = { link : [], back : [] }
+  if ( route.t.link[0] ) {
+    route.t.link.forEach( e => e.destroy() )
+    route.t.back.forEach( e => e.destroy() )
+    route.t.tap.forEach( e => e.destroy() )
+  }
 
   el('[link]', (el, i) => {
 
     route.t.link[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
     route.t.link[i].on('tap', ev => {
-
       window.location.hash = '/' + ev.target.getAttribute('link')
 
       if (ev.target.offsetParent.tagName == 'FOOTER') {
@@ -79,6 +80,15 @@ function linkify () {
     route.t.back[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
     route.t.back[i].on('tap', () => history.go(-1) )
   })
+
+  el('[ontap]', (el, i) => {
+    route.t.tap[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.tap[i].on('tap', ev => {
+      var fn = () => eval(ev.target.getAttribute('ontap'))
+      fn.call(route.routes[ev.target.baseURI.split('#/')[1]])
+    })
+  })
+
 }
 
 function submit (fn) {
