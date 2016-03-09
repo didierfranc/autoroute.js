@@ -68,8 +68,8 @@ function linkify () {
       window.location.hash = '/' + ev.target.getAttribute('link')
 
       if (ev.target.offsetParent.tagName == 'FOOTER') {
-          document.querySelectorAll('footer .active')[0].classList.remove('active')
-          ev.target.classList.add('active')
+        document.querySelectorAll('footer .active')[0].classList.remove('active')
+        ev.target.classList.add('active')
       }
 
     })
