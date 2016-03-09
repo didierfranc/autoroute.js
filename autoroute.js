@@ -68,7 +68,7 @@ function linkify () {
       window.location.hash = '/' + ev.target.getAttribute('link')
 
       if ( !window.location.hash.split('?')[1] ) {
-        document.querySelectorAll('.active')[0].classList.remove('active')
+        document.querySelectorAll('footer .active')[0].classList.remove('active')
         ev.target.classList.add('active')
       }
 
