@@ -67,9 +67,9 @@ function linkify () {
 
       window.location.hash = '/' + ev.target.getAttribute('link')
 
-      if ( !window.location.hash.split('?')[1] ) {
-        document.querySelectorAll('footer .active')[0].classList.remove('active')
-        ev.target.classList.add('active')
+      if (ev.target.offsetParent.tagName == 'FOOTER') {
+          document.querySelectorAll('footer .active')[0].classList.remove('active')
+          ev.target.classList.add('active')
       }
 
     })
