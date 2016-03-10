@@ -12,7 +12,7 @@ function create (path, fn) {
   var e = document.createElement(path)
   document.getElementById('router').appendChild(e)
 
-  e.className = 'route hide'
+  e.className = 'route scroll hide'
   e.slide = false
   e.q = {}
 
@@ -63,9 +63,10 @@ function linkify () {
   }
 
   el('[link]', (el, i) => {
-
-    route.t.link[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.link[i] = new Touch.Manager(el)
+    route.t.link[i].add(new Touch.Tap())
     route.t.link[i].on('tap', ev => {
+
       window.location.hash = '/' + ev.target.getAttribute('link')
 
       if (ev.target.offsetParent.tagName == 'FOOTER') {
@@ -77,18 +78,22 @@ function linkify () {
   })
 
   el('[back]', (el, i) => {
-    route.t.back[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.back[i] = new Touch.Manager(el)
+    route.t.back[i].add(new Touch.Tap())
+
     route.t.back[i].on('tap', () => history.go(-1) )
   })
 
   el('[ontap]', (el, i) => {
-    route.t.tap[i] = new Touch(el, { touchAction: 'pan-x pan-y' })
+    route.t.tap[i] = new Touch.Manager(el)
+    route.t.tap[i].add(new Touch.Tap())
+
     route.t.tap[i].on('tap', ev => {
       var fn = () => eval(ev.target.getAttribute('ontap'))
-      fn.call(route.routes[ev.target.baseURI.split('#/')[1]])
+      fn.call(route.routes[window.location.hash.split('#/')[1]])
     })
-  })
 
+  })
 }
 
 function submit (fn) {
@@ -102,7 +107,6 @@ function submit (fn) {
     }
 
     !e ? fn(form) : console.log('Your form inputs are generating some errors.')
-
   })
 }
 
@@ -209,12 +213,15 @@ function stylify () {
     position: absolute;
     width: 100%;
     height: ${ r };
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     background-color: #fafafa;
     animation-duration: 0.3s;
     animation-delay: 0s;
     animation-fill-mode: both
+  }
+
+  .scroll {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .hide {
