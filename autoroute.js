@@ -63,11 +63,19 @@ function linkify () {
   }
 
   el('[link]', (el, i) => {
-    route.t.link[i] = new Touch.Manager(el)
+    route.t.link[i] = new Touch.Manager(el, {domEvents: true})
+
     route.t.link[i].add(new Touch.Tap())
     route.t.link[i].on('tap', ev => {
 
-      window.location.hash = '/' + ev.target.getAttribute('link')
+      if (!ev.target.hasAttribute('link')) {
+        while (!ev.target.hasAttribute('link')) {
+          ev.target = ev.target.parentElement
+        }
+        window.location.hash = '/' + ev.target.getAttribute('link')
+      } else {
+        window.location.hash = '/' + ev.target.getAttribute('link')
+      }
 
       if (ev.target.offsetParent.tagName == 'FOOTER') {
         document.querySelectorAll('footer .active')[0].classList.remove('active')
