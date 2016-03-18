@@ -63,7 +63,7 @@ function linkify () {
   }
 
   el('[link]', (el, i) => {
-    route.t.link[i] = new Touch.Manager(el, {domEvents: true})
+    route.t.link[i] = new Touch.Manager(el)
 
     route.t.link[i].add(new Touch.Tap())
     route.t.link[i].on('tap', ev => {
