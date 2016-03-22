@@ -6,6 +6,10 @@ https://autoroutejs.readme.io/
 
 ## Changes
 
+**1.0.27**
+
+- Add native scrolling class, and improvements for Cordova
+
 **1.0.26**
 
 - Ontap attribute added, see doc
