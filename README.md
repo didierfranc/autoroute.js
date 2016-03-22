@@ -6,6 +6,11 @@ https://autoroutejs.readme.io/
 
 ## Changes
 
+**1.0.26**
+
+- Ontap attribute added, see doc
+
+
 **1.0.25**
 
 - Improvements for link attributes
