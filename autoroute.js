@@ -63,7 +63,7 @@ function linkify () {
   }
 
   el('[link]', (el, i) => {
-    route.t.link[i] = new Touch.Manager(el)
+    route.t.link[i] = new Touch.Manager(el, {domEvents: true})
 
     route.t.link[i].add(new Touch.Tap())
     route.t.link[i].on('tap', ev => {
@@ -89,7 +89,10 @@ function linkify () {
     route.t.back[i] = new Touch.Manager(el)
     route.t.back[i].add(new Touch.Tap())
 
-    route.t.back[i].on('tap', () => history.go(-1) )
+    route.t.back[i].on('tap', () => {
+      if (typeof cordova != 'undefined') cordova.plugins.Keyboard.close()
+      history.go(-1)
+    })
   })
 
   el('[ontap]', (el, i) => {
@@ -98,10 +101,11 @@ function linkify () {
 
     route.t.tap[i].on('tap', ev => {
       var fn = () => eval(ev.target.getAttribute('ontap'))
-      fn.call(route.routes[window.location.hash.split('#/')[1]])
+      fn.call(route.routes[window.location.hash.split('#/')[1].split('?')[0]])
     })
 
   })
+
 }
 
 function submit (fn) {
