@@ -12,7 +12,7 @@ function create (path, fn) {
   var e = document.createElement(path)
   document.getElementById('router').appendChild(e)
 
-  e.className = 'route scroll hide'
+  e.className = 'route hide'
   e.slide = false
   e.q = {}
 
@@ -90,7 +90,10 @@ function linkify () {
     route.t.back[i].add(new Touch.Tap())
 
     route.t.back[i].on('tap', () => {
-      if (typeof cordova != 'undefined') cordova.plugins.Keyboard.close()
+      if ( typeof cordova != 'undefined'
+        && typeof cordova.plugins.Keyboard != 'undefined')
+      cordova.plugins.Keyboard.close()
+
       history.go(-1)
     })
   })
@@ -140,6 +143,7 @@ function set (obj) {
       ? form[input].value = obj[input]
       : console.log('It seems you want to set value to an inexistant input.')
   }
+
 }
 
 function hash (path) {
@@ -229,6 +233,10 @@ function stylify () {
     animation-duration: 0.3s;
     animation-delay: 0s;
     animation-fill-mode: both
+  }
+
+  .route > .scroll {
+    height: ${ r };
   }
 
   .scroll {
