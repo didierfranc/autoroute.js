@@ -6,6 +6,11 @@ https://autoroutejs.readme.io/
 
 ## Changes
 
+**1.0.30**
+
+- Modal
+- Some fixes
+
 **1.0.27**
 
 - Add native scrolling class, and improvements for Cordova
