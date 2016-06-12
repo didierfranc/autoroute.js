@@ -41,6 +41,7 @@ const linkify = () => {
       fn.call(route.routes[window.location.hash.split('#/')[1].split('?')[0]])
     })
   })
+  
 }
 
 export default linkify
