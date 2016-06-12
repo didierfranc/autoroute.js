@@ -6,7 +6,6 @@ const linkify = () => {
 
   if ( route.t.link[0] ) {
     route.t.link.forEach( e => e.destroy() )
-    route.t.back.forEach( e => e.destroy() )
     route.t.tap.forEach( e => e.destroy() )
   }
 
@@ -30,19 +29,6 @@ const linkify = () => {
         ev.target.classList.add('active')
       }
 
-    })
-  })
-
-  el('[back]', (el, i) => {
-    route.t.back[i] = new Touch.Manager(el)
-    route.t.back[i].add(new Touch.Tap())
-
-    route.t.back[i].on('tap', () => {
-      if ( typeof cordova != 'undefined'
-        && typeof cordova.plugins.Keyboard != 'undefined')
-      cordova.plugins.Keyboard.close()
-
-      history.go(-1)
     })
   })
 
