@@ -9,7 +9,6 @@ var route = {
   routes : {},
   t : {
     link : [],
-    back : [],
     tap : []
   }
 }
