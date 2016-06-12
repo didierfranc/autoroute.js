@@ -29,8 +29,8 @@ const hash = (path) => {
         n.classList.remove('hide')
         if (o) o.classList.add('hide')
       } else {
-        if (n.slide) { slideIn(n, o) }
-        if (o.slide) { slideOut(n, o) }
+        if (n.slide) slideIn(n, o)
+        if (o.slide) slideOut(n, o)
       }
 
     }
