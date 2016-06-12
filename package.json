@@ -1,0 +1,23 @@
+{
+  "name": "autoroute.js",
+  "version": "1.0.30",
+  "description": "Another lightweight javascript routing framework ",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didierfranc/autoroute.js.git"
+  },
+  "keywords": [
+    "javascript",
+    "route"
+  ],
+  "author": "Didier Franc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/didierfranc/autoroute.js/issues"
+  },
+  "homepage": "https://github.com/didierfranc/autoroute.js#readme",
+  "dependencies": {
+    "hammerjs": "^2.0.6"
+  }
+}
