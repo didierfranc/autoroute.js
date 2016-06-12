@@ -1,5 +1,3 @@
-import { el } from '../core/dom'
-
 export const slideIn = (n, o) => {
 
   n.classList.remove('hide')
