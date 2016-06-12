@@ -30,7 +30,7 @@ const hash = (path) => {
         if (o) o.classList.add('hide')
       } else {
         if (n.slide) { slideIn(n, o) }
-        if (o && o.slide) { slideOut(n, o) }
+        if (o.slide) { slideOut(n, o) }
       }
 
     }
