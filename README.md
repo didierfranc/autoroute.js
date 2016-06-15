@@ -6,6 +6,10 @@ https://autoroutejs.readme.io/
 
 ## Changes
 
+**1.0.31**
+
+- Rewrite / modularization
+
 **1.0.30**
 
 - Modal
