@@ -49,3 +49,6 @@ https://autoroutejs.readme.io/
 - HammerJS is now part of Autoroute.js, the best way to handle touch gestures.
 - Autoroute.js uses HammerJS `tap` for `link` attribute and future interactions.
 - Add `link` attribute to any html tag, eg : `<h1 link="route?query=string">Click Me</h2>`.
+
+<img src="https://raw.githubusercontent.com/didierfranc/donate/master/qr.png" width="100" height="100">
+
